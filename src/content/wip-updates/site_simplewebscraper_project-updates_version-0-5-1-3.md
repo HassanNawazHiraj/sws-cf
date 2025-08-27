@@ -1,0 +1,3 @@
+# SimpleWebScraper Update: version-0-5-1-3
+
+Version 0.5.1.3Post date: May 17, 2019 10:13:17 AMWhats new :-fixed a resizing issue on dialog windowsfixed a script issue where a empty string would not work as perimeteradded option to select local files for easy inputuse project location as default for open dialog (can be changed in settings), if disabled, then last opened location will be usedadded "remove empty lines" option in edit urls.added a "clear" button on edit urls windowshow a warning message if project is run without savingoption to disable the above warning in settingsDownload

@@ -1,0 +1,3 @@
+# SimpleWebScraper Update: first-public-release-web-scraper-0-1-beta
+
+First Public Release. Web Scraper 0.1 BetaPost date: Sep 23, 2016 12:25:56 PMWhats New :Xpath parsingSplit_between Parsingpage url in result databasesave in csv formatsave complete projectThis is a non-production release. Please only use it for testing purpose. Debug Error messages are enabled to better understand errors, so program crash might result in data loss. Please wait for a more stable update with error log to address data loss issue.Download Web Scraper

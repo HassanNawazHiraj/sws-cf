@@ -1,0 +1,3 @@
+# SimpleWebScraper Update: web-scraper-0-21
+
+Web Scraper 0.21Post date: Sep 28, 2016 7:12:46 PMWhats New :-Add Text (Before & After Result)get attribute (href,class or any html attribute) added to xpath and xpath_allget name added to xpath and xpath_allbugs fixescopy button added to copy debug htmlError ListSave Errors to txt fileSlight changes to designNote :-Old Script files won't work with this version. You will need to edit each entry on script file to add extra tags introduced in this version to make it workDownload Web Scraper 0.21 Update

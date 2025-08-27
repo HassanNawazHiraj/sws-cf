@@ -1,0 +1,3 @@
+# SimpleWebScraper Update: web-scraper-0-13-xpath_all-single-row-update
+
+Web Scraper 0.13 Xpath_all Single Row UpdatePost date: Sep 28, 2016 8:55:45 AMWhats New :csv save fixed with ""xpath_all addedsingle row option with sepration ";"multi_row is disabled until its tested and will be released to be used with xpath_allKey activation/ trial version removed until software is complete.Download Web Scraper 0.13
