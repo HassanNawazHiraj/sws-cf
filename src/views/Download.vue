@@ -74,43 +74,44 @@
               </svg>
               Download for Windows
             </Button>
-            <Button variant="outline" size="lg" @click="openReleaseNotes">
-              {{ showReleaseNotes ? 'Hide' : 'View' }} Release Notes
+            <Button variant="outline" size="lg" href="/updates/v2.1.0">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Full Release Notes
             </Button>
           </div>
         </Card>
-        
-        <!-- Release Notes -->
-        <div v-if="showReleaseNotes" class="mt-8 max-w-2xl mx-auto">
+
+        <!-- Getting Started Section -->
+        <div class="mt-8 max-w-2xl mx-auto">
           <Card>
-            <Title size="sm" tag="h4" class-name="mb-4">
-              Release Notes - v{{ latestVersion.version }}
-            </Title>
-            <div class="prose prose-sm max-w-none">
-              <div class="mb-4">
-                <Text size="sm" class-name="font-semibold text-gray-900 mb-2">New Features:</Text>
-                <ul class="list-disc list-inside space-y-1">
-                  <li v-for="feature in latestVersion.features" :key="feature">
-                    <Text size="sm" class-name="text-gray-700">{{ feature }}</Text>
-                  </li>
-                </ul>
-              </div>
-              <div class="mb-4">
-                <Text size="sm" class-name="font-semibold text-gray-900 mb-2">Bug Fixes:</Text>
-                <ul class="list-disc list-inside space-y-1">
-                  <li v-for="fix in latestVersion.bugFixes" :key="fix">
-                    <Text size="sm" class-name="text-gray-700">{{ fix }}</Text>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <Text size="sm" class-name="font-semibold text-gray-900 mb-2">System Requirements:</Text>
-                <ul class="list-disc list-inside space-y-1">
-                  <li><Text size="sm" class-name="text-gray-700">Windows 10 or Windows 11</Text></li>
-                  <li><Text size="sm" class-name="text-gray-700">4GB RAM minimum (8GB recommended)</Text></li>
-                  <li><Text size="sm" class-name="text-gray-700">500MB free disk space</Text></li>
-                  <li><Text size="sm" class-name="text-gray-700">.NET 6.0 Runtime (included in installer)</Text></li>
-                </ul>
+            <div class="text-center">
+              <Title size="sm" tag="h4" class-name="mb-3">
+                New to SWS?
+              </Title>
+              <Text size="sm" class-name="text-gray-600 mb-4">
+                Get started with our comprehensive guides and documentation
+              </Text>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <Button variant="outline" size="sm" href="/docs/getting-started" class="flex-1">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                  Getting Started
+                </Button>
+                <Button variant="outline" size="sm" href="/docs/xpath-selectors" class="flex-1">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  XPath Guide
+                </Button>
+                <Button variant="outline" size="sm" href="/docs" class="flex-1">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  All Docs
+                </Button>
               </div>
             </div>
           </Card>
@@ -118,8 +119,58 @@
       </div>
     </section>
     
-    <!-- Previous Versions -->
+    <!-- Recent Updates Section -->
     <section class="py-20 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <Title size="lg" tag="h2" class-name="mb-4">
+            Recent Updates
+          </Title>
+          <Text size="md" class-name="text-gray-600">
+            Stay informed about the latest features, improvements, and bug fixes
+          </Text>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <Card>
+            <div class="flex items-center justify-between mb-3">
+              <Title size="sm" tag="h3">
+                v2.1.0 - Major Update
+              </Title>
+              <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">
+                Latest
+              </span>
+            </div>
+            <Text size="sm" class-name="text-gray-600 mb-4">
+              Enhanced browser-based scraping, advanced multi-threading, and new XPath builder with visual selector tool.
+            </Text>
+            <Button variant="outline" size="sm" href="/updates/v2.1.0" class="w-full">
+              Read Full Update
+            </Button>
+          </Card>
+
+          <Card>
+            <div class="flex items-center justify-between mb-3">
+              <Title size="sm" tag="h3">
+                All Version History
+              </Title>
+              <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">
+                Archive
+              </span>
+            </div>
+            <Text size="sm" class-name="text-gray-600 mb-4">
+              Browse through all previous releases, changelogs, and version history to find what you need.
+            </Text>
+            <Button variant="outline" size="sm" href="/updates" class="w-full">
+              Browse All Updates
+            </Button>
+          </Card>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Previous Versions -->
+    <section class="py-20 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <Title size="lg" tag="h2" class-name="mb-4">
@@ -149,8 +200,8 @@
                 </div>
               </div>
               <div class="flex space-x-3">
-                <Button variant="outline" size="sm" @click="toggleVersionDetails(version.version)">
-                  {{ expandedVersions.includes(version.version) ? 'Hide' : 'Details' }}
+                <Button variant="outline" size="sm" :href="`/updates/v${version.version}`">
+                  Release Notes
                 </Button>
                 <Button variant="outline" size="sm">
                   <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -158,28 +209,6 @@
                   </svg>
                   Download
                 </Button>
-              </div>
-            </div>
-            
-            <!-- Version Details -->
-            <div v-if="expandedVersions.includes(version.version)" class="mt-6 pt-6 border-t border-gray-200">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Text size="sm" class-name="font-semibold text-gray-900 mb-2">Key Features:</Text>
-                  <ul class="list-disc list-inside space-y-1">
-                    <li v-for="feature in version.features" :key="feature">
-                      <Text size="sm" class-name="text-gray-700">{{ feature }}</Text>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <Text size="sm" class-name="font-semibold text-gray-900 mb-2">Bug Fixes:</Text>
-                  <ul class="list-disc list-inside space-y-1">
-                    <li v-for="fix in version.bugFixes" :key="fix">
-                      <Text size="sm" class-name="text-gray-700">{{ fix }}</Text>
-                    </li>
-                  </ul>
-                </div>
               </div>
             </div>
           </Card>
@@ -242,6 +271,35 @@
             </Text>
           </Card>
         </div>
+
+        <!-- Documentation Links -->
+        <div class="mt-12 text-center">
+          <div class="mb-6">
+            <Text size="md" class-name="text-gray-600 mb-4">
+              Need more detailed guidance? Check out our complete documentation:
+            </Text>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
+            <Button variant="outline" href="/docs/installation" class="flex-1">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+              </svg>
+              Installation Guide
+            </Button>
+            <Button variant="outline" href="/docs/getting-started" class="flex-1">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              Quick Start Tutorial
+            </Button>
+            <Button variant="outline" href="/docs" class="flex-1">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              Full Documentation
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   </Layout>
@@ -254,9 +312,6 @@ import Card from '../components/Card.vue';
 import Title from '../components/Title.vue';
 import Text from '../components/Text.vue';
 import Button from '../components/Button.vue';
-
-const showReleaseNotes = ref(false);
-const expandedVersions = ref<string[]>([]);
 
 const latestVersion = {
   version: '2.1.0',
@@ -284,54 +339,21 @@ const previousVersions = [
     date: '2025-07-15',
     size: '42.8 MB',
     downloads: '8,920',
-    type: 'lts',
-    features: [
-      'Basic browser scraping support',
-      'Multi-threading up to 20 concurrent requests',
-      'XPath selector validation',
-      'CSV export functionality'
-    ],
-    bugFixes: [
-      'Fixed timeout issues with slow websites',
-      'Improved XPath error messages',
-      'Fixed UI freezing during large scraping operations'
-    ]
+    type: 'lts'
   },
   {
     version: '1.9.2',
     date: '2025-06-10',
     size: '38.5 MB',
     downloads: '15,680',
-    type: 'stable',
-    features: [
-      'XPath-based element selection',
-      'Basic multi-threading support',
-      'CSV data export',
-      'Simple UI for scraping configuration'
-    ],
-    bugFixes: [
-      'Fixed character encoding issues',
-      'Resolved crashes with malformed HTML',
-      'Improved error logging'
-    ]
+    type: 'stable'
   },
   {
     version: '1.8.1',
     date: '2025-05-05',
     size: '35.2 MB',
     downloads: '22,150',
-    type: 'stable',
-    features: [
-      'Basic web scraping functionality',
-      'XPath selector support',
-      'Single-threaded scraping',
-      'Basic CSV output'
-    ],
-    bugFixes: [
-      'Initial stability improvements',
-      'Fixed installation issues on Windows 11',
-      'Improved compatibility with older websites'
-    ]
+    type: 'stable'
   }
 ];
 
@@ -342,18 +364,5 @@ const formatDate = (dateString: string) => {
     month: 'long', 
     day: 'numeric' 
   });
-};
-
-const toggleVersionDetails = (version: string) => {
-  const index = expandedVersions.value.indexOf(version);
-  if (index > -1) {
-    expandedVersions.value.splice(index, 1);
-  } else {
-    expandedVersions.value.push(version);
-  }
-};
-
-const openReleaseNotes = () => {
-  showReleaseNotes.value = !showReleaseNotes.value;
 };
 </script>
