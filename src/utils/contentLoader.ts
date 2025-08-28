@@ -11,6 +11,7 @@ export const UPDATES_CONFIG = {
 
 export interface ContentMeta {
   title: string;
+  description?: string;
   date?: string;
   category?: string;
   order?: number;
