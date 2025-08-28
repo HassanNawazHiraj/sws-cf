@@ -8,6 +8,14 @@ import UpdatePage from '../views/UpdatePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to, from, savedPosition) {
+    // If there's a saved position (browser back/forward), use it
+    if (savedPosition) {
+      return savedPosition
+    }
+    // Always scroll to top for new navigation
+    return { top: 0, behavior: 'smooth' }
+  },
   routes: [
     {
       path: '/',

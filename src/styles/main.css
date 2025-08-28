@@ -49,6 +49,14 @@
   margin-left: 1.5rem;
 }
 
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
 .prose li {
   margin-bottom: 0.5rem;
 }
@@ -133,4 +141,27 @@
 
 .prose-sm code {
   font-size: 0.8125rem;
+}
+
+/* Image styling for markdown content */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin: 1.5rem auto;
+  display: block;
+}
+
+.prose img[alt] {
+  margin-bottom: 0.5rem;
+}
+
+.prose img + em {
+  display: block;
+  text-align: center;
+  font-style: italic;
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
 }

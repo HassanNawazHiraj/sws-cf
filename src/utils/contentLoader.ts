@@ -4,14 +4,14 @@ import matter from 'gray-matter';
 import gettingStartedMd from '../content/docs/getting-started.md?raw';
 import installationMd from '../content/docs/installation.md?raw';
 import xpathSelectorsMd from '../content/docs/xpath-selectors.md?raw';
-import v210Md from '../content/updates/v2.1.0.md?raw';
-import v205Md from '../content/updates/v2.0.5.md?raw';
-import v192Md from '../content/updates/v1.9.2.md?raw';
+
+// Configuration for updates
+export const UPDATES_CONFIG = {
+  maxUpdateNumber: 89, // Update this number when adding more updates
+};
 
 export interface ContentMeta {
   title: string;
-  description?: string;
-  version?: string;
   date?: string;
   category?: string;
   order?: number;
@@ -29,9 +29,6 @@ const staticContent: Record<string, string> = {
   'docs/getting-started': gettingStartedMd,
   'docs/installation': installationMd,
   'docs/xpath-selectors': xpathSelectorsMd,
-  'updates/v2.1.0': v210Md,
-  'updates/v2.0.5': v205Md,
-  'updates/v1.9.2': v192Md,
 };
 
 // Cache for processed content
@@ -45,8 +42,20 @@ export async function loadContent(type: 'docs' | 'updates', slug: string): Promi
   }
 
   try {
-    // Get content from static imports
-    const rawContent = staticContent[cacheKey];
+    let rawContent: string | undefined;
+
+    if (type === 'docs') {
+      // Get content from static imports for docs
+      rawContent = staticContent[cacheKey];
+    } else if (type === 'updates') {
+      // Handle numbered updates dynamically
+      const updateNumber = parseInt(slug);
+      if (!isNaN(updateNumber) && updateNumber >= 1 && updateNumber <= UPDATES_CONFIG.maxUpdateNumber) {
+        // Dynamic import for numbered updates
+        const module = await import(`../content/updates/${updateNumber}.md?raw`);
+        rawContent = module.default;
+      }
+    }
     
     if (!rawContent) {
       console.warn(`Content not found: ${cacheKey}`);
@@ -75,25 +84,39 @@ export async function loadContent(type: 'docs' | 'updates', slug: string): Promi
 export async function loadAllContent(type: 'docs' | 'updates'): Promise<ContentItem[]> {
   const items: ContentItem[] = [];
   
-  // Get all keys for the specified type
-  const keys = Object.keys(staticContent).filter(key => key.startsWith(`${type}/`));
-  
-  for (const key of keys) {
-    const slug = key.replace(`${type}/`, '');
-    const item = await loadContent(type, slug);
-    if (item) {
-      items.push(item);
-    }
-  }
-  
-  // Sort docs by order, updates by date (newest first)
   if (type === 'docs') {
+    // Get all keys for docs
+    const keys = Object.keys(staticContent).filter(key => key.startsWith(`${type}/`));
+    
+    for (const key of keys) {
+      const slug = key.replace(`${type}/`, '');
+      const item = await loadContent(type, slug);
+      if (item) {
+        items.push(item);
+      }
+    }
+    
+    // Sort docs by order
     items.sort((a, b) => (a.meta.order || 999) - (b.meta.order || 999));
-  } else {
+  } else if (type === 'updates') {
+    // Load all numbered updates dynamically (in descending order: newest first)
+    for (let i = UPDATES_CONFIG.maxUpdateNumber; i >= 1; i--) {
+      try {
+        const item = await loadContent(type, i.toString());
+        if (item) {
+          items.push(item);
+        }
+      } catch (error) {
+        console.warn(`Failed to load update ${i}:`, error);
+      }
+    }
+    
+    // Items are already in correct order by file number (highest first)
+    // Sort by slug number to ensure proper ordering (88, 87, 86, ..., 1)
     items.sort((a, b) => {
-      const dateA = new Date(a.meta.date || '');
-      const dateB = new Date(b.meta.date || '');
-      return dateB.getTime() - dateA.getTime();
+      const numA = parseInt(a.meta.slug) || 0;
+      const numB = parseInt(b.meta.slug) || 0;
+      return numB - numA; // Descending order: higher numbers first
     });
   }
   

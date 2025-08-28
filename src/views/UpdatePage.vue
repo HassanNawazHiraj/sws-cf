@@ -29,9 +29,6 @@
             </svg>
             Back to Updates
           </router-link>
-          <span v-if="content.meta.version" class="bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">
-            Version {{ content.meta.version }}
-          </span>
         </div>
         
         <Title size="xl" tag="h1" class-name="mb-4">
@@ -45,21 +42,11 @@
             </svg>
             Released {{ formatDate(content.meta.date) }}
           </span>
-          <router-link 
-            v-if="content.meta.version"
-            to="/download"
-            class="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors duration-200"
-          >
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            Download v{{ content.meta.version }}
-          </router-link>
         </div>
       </header>
       
       <!-- Markdown Content -->
-      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 pt-2">
         <MarkdownRenderer :content="content.content" />
       </div>
       
@@ -70,21 +57,30 @@
             <router-link
               v-if="previousUpdate"
               :to="`/updates/${previousUpdate.meta.slug}`"
-              class="inline-flex items-center text-sm text-green-600 hover:text-green-700"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700 hover:bg-green-50 rounded-lg transition-colors duration-200"
             >
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
               </svg>
-              {{ previousUpdate.meta.title }}
+              Previous Update
             </router-link>
           </div>
-          <div>
+          <div class="flex items-center space-x-4">
+            <router-link
+              to="/updates"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded-lg transition-colors duration-200"
+            >
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+              </svg>
+              All Updates
+            </router-link>
             <router-link
               v-if="nextUpdate"
               :to="`/updates/${nextUpdate.meta.slug}`"
-              class="inline-flex items-center text-sm text-green-600 hover:text-green-700"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700 hover:bg-green-50 rounded-lg transition-colors duration-200"
             >
-              {{ nextUpdate.meta.title }}
+              Next Update
               <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
@@ -104,7 +100,7 @@ import MarkdownRenderer from '../components/MarkdownRenderer.vue';
 import Title from '../components/Title.vue';
 import Text from '../components/Text.vue';
 import Button from '../components/Button.vue';
-import { loadContent, loadAllContent, type ContentItem } from '../utils/contentLoader';
+import { loadContent, loadAllContent, type ContentItem, UPDATES_CONFIG } from '../utils/contentLoader';
 
 const route = useRoute();
 
@@ -123,23 +119,33 @@ const formatDate = (dateString: string) => {
 };
 
 const previousUpdate = computed(() => {
-  if (!content.value || !allUpdates.value.length) return null;
+  if (!content.value) return null;
   
-  const currentIndex = allUpdates.value.findIndex(
-    update => update.meta.slug === content.value?.meta.slug
-  );
+  const currentSlug = parseInt(content.value.meta.slug);
+  if (isNaN(currentSlug) || currentSlug <= 1) return null; // No previous for update 1 (oldest)
   
-  return currentIndex < allUpdates.value.length - 1 ? allUpdates.value[currentIndex + 1] : null;
+  const previousSlug = currentSlug - 1;
+  return {
+    meta: {
+      slug: previousSlug.toString(),
+      title: `Update ${previousSlug}`
+    }
+  };
 });
 
 const nextUpdate = computed(() => {
-  if (!content.value || !allUpdates.value.length) return null;
+  if (!content.value) return null;
   
-  const currentIndex = allUpdates.value.findIndex(
-    update => update.meta.slug === content.value?.meta.slug
-  );
+  const currentSlug = parseInt(content.value.meta.slug);
+  if (isNaN(currentSlug) || currentSlug >= UPDATES_CONFIG.maxUpdateNumber) return null; // No next for latest update
   
-  return currentIndex > 0 ? allUpdates.value[currentIndex - 1] : null;
+  const nextSlug = currentSlug + 1;
+  return {
+    meta: {
+      slug: nextSlug.toString(),
+      title: `Update ${nextSlug}`
+    }
+  };
 });
 
 const loadUpdate = async (slug: string) => {
@@ -171,8 +177,8 @@ const loadUpdate = async (slug: string) => {
 const loadAllUpdates = async () => {
   try {
     const updates = await loadAllContent('updates');
-    // Filter out index and sort by date (newest first)
-    allUpdates.value = updates.filter(update => update.meta.slug !== 'index' && update.meta.version);
+    // All updates are now numbered, so we can use them all
+    allUpdates.value = updates;
   } catch (err) {
     console.warn('Failed to load all updates for navigation', err);
   }
