@@ -41,8 +41,9 @@ import Button from './Button.vue';
 
 const navigationItems = [
   { name: 'Home', href: '/' },
-  { name: 'Download', href: '/download' },
   { name: 'Pricing', href: '/pricing' },
+  { name: 'Updates', href: '/updates' },
+  { name: 'Download', href: '/download' },
   { name: 'Documentation', href: '/docs' }
 ];
 </script>
