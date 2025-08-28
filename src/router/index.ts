@@ -5,6 +5,8 @@ import Download from '../views/Download.vue'
 import DocsPage from '../views/DocsPage.vue'
 import Updates from '../views/Updates.vue'
 import UpdatePage from '../views/UpdatePage.vue'
+import About from '../views/About.vue'
+import Contact from '../views/Contact.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +54,16 @@ const router = createRouter({
       name: 'update-page',
       component: UpdatePage,
       props: true
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: Contact
     }
   ]
 })

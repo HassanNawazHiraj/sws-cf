@@ -23,11 +23,10 @@
         </div>
         
         <div>
-          <h3 class="text-sm font-semibold text-gray-900 mb-4">Company</h3>
+          <h3 class="text-sm font-semibold text-gray-900 mb-4">ByteRemix</h3>
           <ul class="space-y-2">
-            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">About</a></li>
-            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Contact</a></li>
-            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Privacy Policy</a></li>
+            <li><router-link to="/about" class="text-gray-600 hover:text-gray-900 text-sm">About</router-link></li>
+            <li><router-link to="/contact" class="text-gray-600 hover:text-gray-900 text-sm">Contact</router-link></li>
           </ul>
         </div>
       </div>

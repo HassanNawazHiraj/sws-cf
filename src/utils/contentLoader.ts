@@ -2,7 +2,6 @@ import matter from 'gray-matter';
 
 // Import all markdown files statically
 import gettingStartedMd from '../content/docs/getting-started.md?raw';
-import installationMd from '../content/docs/installation.md?raw';
 import xpathSelectorsMd from '../content/docs/xpath-selectors.md?raw';
 
 // Configuration for updates
@@ -27,7 +26,6 @@ export interface ContentItem {
 // Static content mapping
 const staticContent: Record<string, string> = {
   'docs/getting-started': gettingStartedMd,
-  'docs/installation': installationMd,
   'docs/xpath-selectors': xpathSelectorsMd,
 };
 

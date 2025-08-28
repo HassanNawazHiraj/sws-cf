@@ -123,67 +123,22 @@ XPath uses path expressions to navigate HTML elements, similar to file paths. It
 //div[@class='product']/@data-price
 ```
 
-## SWS XPath Builder
-
-SWS includes a visual XPath builder:
-
-1. **Enable Browser Mode**
-2. **Open Target Page**
-3. **Activate Selector Tool** (crosshair icon)
-4. **Click Elements** to generate XPath
-5. **Refine Selection** as needed
-
-## Testing XPath
-
-### Browser Console
-
-Test in browser developer tools:
-
-```javascript
-$x("//div[@class='product-title']")
-```
-
-### SWS Preview
-
-1. Configure XPath selector
-2. Click "Preview" to see matches
-3. Refine based on results
-
 ## Best Practices
 
-### ✅ Do
+### Do
 
 - Use meaningful attributes (`class`, `id`)
 - Start simple, add complexity when needed
 - Test on multiple pages
 - Use `contains()` for dynamic content
 
-### ❌ Don't
+### Don't
 
 - Use overly specific paths
 - Rely on position-only selectors
 - Ignore case sensitivity
 - Use fragile deep nesting
 
-## Common Mistakes
-
-### Too Specific
-```xpath
-❌ //html/body/div[1]/div[2]/span[@class='price']
-✅ //span[@class='price']
-```
-
-### Dynamic IDs
-```xpath
-❌ //div[@id='product-123']
-✅ //div[starts-with(@id, 'product-')]
-```
-
-### Case Issues
-```xpath
-❌ //div[@class='Product-Title']
-✅ //div[@class='product-title']
-```
 
 ## XPath Functions Reference
 
@@ -196,19 +151,3 @@ $x("//div[@class='product-title']")
 | `position()` | Element position | `position() = 1` |
 | `last()` | Last element | `[last()]` |
 
-## Troubleshooting
-
-### No Elements Found
-- Verify XPath syntax
-- Check if elements exist
-- Test in browser console first
-
-### Wrong Elements Selected
-- Make selectors more specific
-- Add attribute conditions
-- Use position filtering
-
-### Breaks on Different Pages
-- Remove page-specific identifiers
-- Use generic class names
-- Test across multiple pages
